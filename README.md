@@ -18,7 +18,7 @@ A new six-page editorial fashion website with cream and gold styling and your su
 - Phone 1: +91 95446 75067
 - Phone 2: +91 97446 75067
 - Email: houseoflavira@gmail.com
-- General location: Kavalam, Kerala, India
+- General location: Kerala, India
 
 ## How to edit
 
@@ -36,3 +36,19 @@ A new six-page editorial fashion website with cream and gold styling and your su
 - Replace photos with your own product images and confirm content before launching a store.
 
 The original logo is preserved in the `assets/lavira-logo.webp` crop, derived from the file you uploaded.
+
+## V4 — Confirmed client revisions
+
+- Readable heading font **Libre Baskerville** and UI/body font **Inter**, both loaded via Google Fonts.
+- Location copy and placeholder map changed to **Kerala, India**, with no specific store address claimed.
+- Footer years **2026–2027**, credit **Designed & Developed by MAX EFEX**.
+- **Amazon, Flipkart, IndiaMART** marketplace cards appear on Home and Shop.
+- **Instagram, Threads, Facebook, YouTube** appear in every page's footer under House of Lavira.
+
+### IMPORTANT: Activate the marketplace and social links
+
+Open `assets/site.js` and find `LAVIRA_ACCOUNT_LINKS` near the top. Paste the real House of Lavira account/profile/store URL in each quoted field. Example: `instagram: 'https://www.instagram.com/YOUR_ACTUAL_ACCOUNT/'`. The link automatically becomes clickable and opens in a new tab. Leaving it blank displays **Coming soon**; no unofficial or guessed accounts are linked.
+
+### Map later
+
+The embedded map currently searches **Kerala, India** only. Edit `LAVIRA_MAP_QUERY` in `assets/site.js` once the exact store address is approved.
