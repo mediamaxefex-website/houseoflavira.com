@@ -1,6 +1,28 @@
 'use strict';
 // Edit this one value to update the exact location in the Contact page map and directions.
-const LAVIRA_MAP_QUERY = 'Kavalam, Kerala, India';
+const LAVIRA_MAP_QUERY = 'Kerala, India';
+// PASTE OFFICIAL STORE / SOCIAL PROFILE URLs BETWEEN THE QUOTES WHEN READY.
+// Leave an empty string to show the visible "Coming soon" state (no broken links).
+// Use complete https:// URLs. Do NOT enter generic marketplace homepages.
+const LAVIRA_ACCOUNT_LINKS = {
+  amazon: '',
+  flipkart: '',
+  indiamart: '',
+  instagram: '',
+  threads: '',
+  facebook: '',
+  youtube: ''
+};
+function initAccountLinks(){
+  document.querySelectorAll('[data-account]').forEach(link=>{
+    const raw=LAVIRA_ACCOUNT_LINKS[link.dataset.account] || '';
+    let valid='';
+    try{const url=new URL(raw);if(url.protocol==='https:' || url.protocol==='http:')valid=url.href}catch{}
+    const status=link.querySelector('.account-status');
+    if(valid){link.href=valid;link.target='_blank';link.rel='noopener noreferrer';link.removeAttribute('aria-disabled');if(status)status.textContent='Visit ↗'}
+    else{link.removeAttribute('href');link.removeAttribute('target');link.setAttribute('aria-disabled','true');if(status)status.textContent='Coming soon'}
+  });
+}
 const LAVIRA_EMAIL = 'houseoflavira@gmail.com';
 const LAVIRA_WA = '919544675067';
 const LOOKS = {
@@ -23,4 +45,4 @@ function initShop(){if(!document.querySelector('#shop-grid'))return;const q=new 
 function initProductActions(){document.querySelectorAll('[data-heart]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.heart;let saved=safeSaved();const add=!saved.includes(id);saved=add?[...saved,id]:saved.filter(s=>s!==id);writeSaved(saved);updateHearts();applyShop();toast(add?'Added to your saved looks':'Removed from saved looks')}));const dialog=document.querySelector('#preview-dialog');document.querySelectorAll('[data-preview]').forEach(b=>b.addEventListener('click',()=>{if(!dialog)return;const look=LOOKS[b.dataset.preview];if(!look)return;document.querySelector('#dialog-image').src=`assets/${look.img}.webp`;document.querySelector('#dialog-image').alt=`Editorial concept for ${look.title}`;document.querySelector('#dialog-title').textContent=look.title;document.querySelector('#dialog-description').textContent=look.desc;document.querySelector('#dialog-link').href=`https://wa.me/${LAVIRA_WA}?text=${encodeURIComponent('Hello House of Lavira, please share availability, sizes and price for '+look.title+'.')}`;dialog.showModal()}));dialog?.querySelector('.dialog-close')?.addEventListener('click',()=>dialog.close());dialog?.addEventListener('click',e=>{if(e.target===dialog)dialog.close()})}
 function initLookbook(){const dialog=document.querySelector('#lightbox');if(!dialog)return;document.querySelectorAll('[data-lightbox]').forEach(b=>b.addEventListener('click',()=>{const name=b.dataset.lightbox;const title=b.dataset.caption||'Lavira editorial';document.querySelector('#lightbox-image').src=`assets/${name}.webp`;document.querySelector('#lightbox-image').alt=title;document.querySelector('#lightbox-caption').textContent=title;dialog.showModal()}));dialog.querySelector('.lightbox-close')?.addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()})}
 function initContact(){const map=document.querySelector('#location-map');if(map)map.src=`https://maps.google.com/maps?q=${encodeURIComponent(LAVIRA_MAP_QUERY)}&output=embed`;const link=document.querySelector('#map-directions');if(link)link.href=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LAVIRA_MAP_QUERY)}`;const form=document.querySelector('#contact-form');if(!form)return;form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);const name=String(d.get('name')||'').trim();const from=String(d.get('email')||'').trim();const phone=String(d.get('phone')||'').trim();const topic=String(d.get('topic')||'General enquiry');const msg=String(d.get('message')||'').trim();const subject=encodeURIComponent(`[Lavira Website] ${topic} — ${name}`);const body=encodeURIComponent(`Name: ${name}\nEmail: ${from}\nPhone: ${phone}\nEnquiry type: ${topic}\n\n${msg}`);window.location.href=`mailto:${LAVIRA_EMAIL}?subject=${subject}&body=${body}`;const status=document.querySelector('#form-status');if(status)status.textContent='Your email application should open with your message ready to send.'})}
-document.addEventListener('DOMContentLoaded',()=>{initMenu();updateHearts();initCollectionFilters();initShop();initProductActions();initLookbook();initContact()});
+document.addEventListener('DOMContentLoaded',()=>{initAccountLinks();initMenu();updateHearts();initCollectionFilters();initShop();initProductActions();initLookbook();initContact()});
