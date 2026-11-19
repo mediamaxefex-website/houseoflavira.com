@@ -2,7 +2,7 @@
 
 // Edit this value to update the exact location in the Contact page map and directions.
 const LAVIRA_MAP_QUERY = 'Kerala, India';
-// Add official store/social URLs here when ready; blank values show “Coming soon”.
+// Add VERIFIED official marketplace/social profile URLs here. Blank values stay unlinked and show “Coming soon”.
 const LAVIRA_ACCOUNT_LINKS = {
   amazon: '',
   flipkart: '',
@@ -13,6 +13,7 @@ const LAVIRA_ACCOUNT_LINKS = {
   youtube: ''
 };
 const LAVIRA_EMAIL = 'info@houseoflavira.com';
+const LAVIRA_ORDERS_EMAIL = 'orders@houseoflavira.com';
 const LAVIRA_WA = '919544675067';
 
 const LOOKS = {
