@@ -264,3 +264,6 @@ h1,h2,h3{overflow-wrap:break-word;text-wrap:balance}
 .story-intro .signature .signature-house{display:block;font:600 11px/1.3 var(--sans);letter-spacing:.28em;color:var(--gold-dark);margin:0}
 .story-intro .signature .signature-lavira{display:block;font:500 clamp(40px,4vw,58px)/1.05 var(--serif);letter-spacing:.065em;color:var(--gold-dark)}
 .story-intro .signature .signature-location{display:block;font:500 10px/1.4 var(--sans);letter-spacing:.22em;color:var(--gold-dark);margin:5px 0 0}
+
+/* Additional published photo gallery, without replacing existing editorial images */
+.lavira-live-section{padding-top:65px;padding-bottom:85px}.lavira-live-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:25px}.lavira-live-grid figure{margin:0;background:#fffaf3;border:1px solid var(--line);padding-bottom:15px}.lavira-live-grid img{width:100%;height:340px;object-fit:cover;display:block}.lavira-live-grid figcaption{font:500 15px/1.5 var(--sans);padding:12px 15px;color:var(--ink)}@media(max-width:800px){.lavira-live-grid{grid-template-columns:repeat(2,1fr)}.lavira-live-grid img{height:260px}}@media(max-width:520px){.lavira-live-grid{grid-template-columns:1fr}.lavira-live-grid img{height:auto;aspect-ratio:4/5}}

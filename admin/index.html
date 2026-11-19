@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f7f2e9">
+<title>Photo Management · HOUSE OF LAVIRA</title>
+<link rel="stylesheet" href="../assets/lavira-admin.css"></head>
+<body><main class="panel">
+<header class="masthead"><span class="eyebrow">HOUSE OF</span><h1>LAVIRA</h1><p>Photo Management</p></header>
+<div id="message" role="status" aria-live="polite"></div>
+<section id="setup" class="card" hidden><h2>Setup required</h2><p>Photo management has not been activated. Ask the website owner to finish the private Supabase setup.</p></section>
+<section id="login" class="card" hidden><h2>Photo editor sign in</h2><p>Only approved House of Lavira photo editors can use this panel.</p>
+<form id="login-form"><label>Email<input name="email" type="email" autocomplete="username" required></label>
+<label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+<button type="submit">Sign in</button></form></section>
+<section id="dashboard" hidden>
+<div class="toolbar"><p>Signed in as <strong id="identity"></strong></p><button id="signout" type="button" class="secondary">Sign out</button></div>
+<div class="card"><h2>Upload photography</h2><p>Upload JPG, PNG, or WebP images, up to 5 MB each. Only non-confidential photos.</p>
+<form id="upload-form"><label>Gallery<select name="category" required><option value="collections">Collections</option><option value="lookbook">Lookbook</option><option value="products">Products / Shop</option></select></label>
+<label>Photo title<input name="title" required maxlength="100" placeholder="Example: Golden Ivory Edit"></label>
+<label>Image<input name="photo" type="file" accept="image/jpeg,image/png,image/webp" required></label>
+<label class="checkbox"><input name="published" type="checkbox"> Publish on website immediately</label>
+<button type="submit" id="upload-button">Upload photo</button></form></div>
+<div class="card"><div class="toolbar"><h2>Your uploaded photos</h2><button class="secondary" type="button" id="refresh">Refresh</button></div>
+<div id="photo-list" class="photo-list"></div></div></section>
+<footer>Photo-only access. Website source code and account management are not available here.</footer>
+</main><script src="../assets/lavira-supabase-config.js"></script><script type="module" src="../assets/lavira-admin.js"></script></body></html>
