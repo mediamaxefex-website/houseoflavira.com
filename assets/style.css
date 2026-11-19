@@ -258,3 +258,9 @@ h1,h2,h3{overflow-wrap:break-word;text-wrap:balance}
 .footer-bottom .footer-credit{color:#dfbe80;font-weight:700}
 @media(max-width:800px){.marketplace-grid{grid-template-columns:1fr}.footer-social-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.footer-social-grid{grid-template-columns:1fr}.marketplaces-section{padding:60px 0}.external-account{min-height:64px}}
+
+/* HOUSE OF LAVIRA editorial signature: small HOUSE OF, prominent golden LAVIRA */
+.story-intro .signature{display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:254px;padding-top:18px;line-height:1.1}
+.story-intro .signature .signature-house{display:block;font:600 11px/1.3 var(--sans);letter-spacing:.28em;color:var(--gold-dark);margin:0}
+.story-intro .signature .signature-lavira{display:block;font:500 clamp(40px,4vw,58px)/1.05 var(--serif);letter-spacing:.065em;color:var(--gold-dark)}
+.story-intro .signature .signature-location{display:block;font:500 10px/1.4 var(--sans);letter-spacing:.22em;color:var(--gold-dark);margin:5px 0 0}
