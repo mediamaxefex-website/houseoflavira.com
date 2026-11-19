@@ -10,7 +10,8 @@
 <section id="login" class="card" hidden><h2>Photo editor sign in</h2><p>Only approved House of Lavira photo editors can use this panel.</p>
 <form id="login-form"><label>Email<input name="email" type="email" autocomplete="username" required></label>
 <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-<button type="submit">Sign in</button></form></section>
+<button type="submit">Sign in</button></form><p><button type="button" id="forgot-password" class="secondary">Forgot password?</button></p></section>
+<section id="recovery" class="card" hidden><h2>Set a new password</h2><p>Choose a unique password for your photo-management account.</p><form id="recovery-form"><label>New password<input name="password" type="password" autocomplete="new-password" minlength="12" required></label><label>Confirm new password<input name="confirm" type="password" autocomplete="new-password" minlength="12" required></label><button type="submit">Save new password</button></form></section>
 <section id="dashboard" hidden>
 <div class="toolbar"><p>Signed in as <strong id="identity"></strong></p><button id="signout" type="button" class="secondary">Sign out</button></div>
 <div class="card"><h2>Upload photography</h2><p>Upload JPG, PNG, or WebP images, up to 5 MB each. Only non-confidential photos.</p>
@@ -22,4 +23,4 @@
 <div class="card"><div class="toolbar"><h2>Your uploaded photos</h2><button class="secondary" type="button" id="refresh">Refresh</button></div>
 <div id="photo-list" class="photo-list"></div></div></section>
 <footer>Photo-only access. Website source code and account management are not available here.</footer>
-</main><script src="../assets/lavira-supabase-config.js?v=20261119-2"></script><script type="module" src="../assets/lavira-admin.js?v=20261119-2"></script></body></html>
+</main><script src="../assets/lavira-supabase-config.js?v=20261119-2"></script><script type="module" src="../assets/lavira-admin.js?v=20261119-3"></script></body></html>

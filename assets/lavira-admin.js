@@ -5,6 +5,22 @@ const message = msg => { $('message').textContent = msg; };
 const configured = Boolean(config.url && config.publishableKey);
 const client = configured ? createClient(config.url, config.publishableKey, { auth: { persistSession: true, autoRefreshToken: true }}) : null;
 let signedInUser = null;
+let inPasswordRecovery = new URLSearchParams(window.location.hash.replace(/^#/, '')).get('type') === 'recovery';
+if (client) {
+  client.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      inPasswordRecovery = true;
+      showRecovery();
+    }
+  });
+}
+function showRecovery() {
+  $('setup').hidden = true;
+  $('login').hidden = true;
+  $('dashboard').hidden = true;
+  $('recovery').hidden = false;
+}
+
 const approved = async () => {
   const { data: { user }, error } = await client.auth.getUser();
   if (error || !user) return null;
@@ -15,6 +31,8 @@ const approved = async () => {
 async function refreshAuth() {
   $('setup').hidden = configured; $('login').hidden = true; $('dashboard').hidden = true;
   if (!configured) return;
+  if (inPasswordRecovery) { showRecovery(); return; }
+  $('recovery').hidden = true;
   signedInUser = await approved();
   if (!signedInUser) { $('login').hidden = false; return; }
   $('identity').textContent = signedInUser.email || 'Approved editor';
@@ -54,6 +72,37 @@ async function listPhotos() {
     actions.append(toggle,del);card.append(img,title,details,actions);target.append(card);
   }
 }
+$('forgot-password').addEventListener('click', async () => {
+  const email = $('login-form').querySelector('[name="email"]').value.trim();
+  if (!email) { message('Enter your email address first.'); return; }
+  const button = $('forgot-password'); button.disabled = true;
+  try {
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://houseoflavira.com/admin/'
+    });
+    message(error ? 'Could not request a reset right now. Try again later.' : 'If this email is registered, check its inbox for a reset link.');
+  } catch { message('Could not send a reset link right now.'); }
+  finally { button.disabled = false; }
+});
+$('recovery-form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const fields = new FormData(event.target);
+  const password = String(fields.get('password')), confirm = String(fields.get('confirm'));
+  if (password !== confirm) { message('Passwords do not match.'); return; }
+  if (password.length < 12) { message('Use at least 12 characters.'); return; }
+  const button = event.target.querySelector('button'); button.disabled = true;
+  try {
+    const { error } = await client.auth.updateUser({ password });
+    if (error) { message(error.message); return; }
+    await client.auth.signOut();
+    inPasswordRecovery = false;
+    history.replaceState(null, '', '/admin/');
+    event.target.reset();
+    message('Password saved. Sign in with your new password.');
+    await refreshAuth();
+  } catch { message('Could not save password. Request a new recovery link.'); }
+  finally { button.disabled = false; }
+});
 $('login-form').addEventListener('submit',async event=>{
   event.preventDefault();const button=event.target.querySelector('button');button.disabled=true;message('');
   const fields=new FormData(event.target);
