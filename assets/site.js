@@ -252,5 +252,13 @@ document.addEventListener("click", function (event) {
   if (host === "maps.app.goo.gl" || host === "maps.google.com" ||
       (host === "google.com" && link.pathname.startsWith("/maps"))) {
     window.gtag("event", "google_maps_click", { map_location: link.href.split("?")[0] });
+  } else {
+    const channels = {
+      "wa.me": "whatsapp", "api.whatsapp.com": "whatsapp", "web.whatsapp.com": "whatsapp",
+      "instagram.com": "instagram", "facebook.com": "facebook",
+      "meesho.com": "meesho", "myntra.com": "myntra"
+    };
+    const channel = channels[host];
+    if (typeof channel === "string") window.gtag("event", channel + "_click");
   }
 }, true);
